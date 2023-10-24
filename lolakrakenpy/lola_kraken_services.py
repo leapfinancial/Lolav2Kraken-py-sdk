@@ -1,5 +1,5 @@
 
-from lolakraken.lola_kraken_hway_services import lolahwayservicesmanager
+from lolakrakenpy.lola_kraken_hway_services import lolahwayservicesmanager
 
 
 
