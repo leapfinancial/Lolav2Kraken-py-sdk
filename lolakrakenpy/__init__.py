@@ -1,2 +1,2 @@
-from lola_kraken_hway_services import lolaHwayServicesManager
+from lola_kraken_hway_services import LolaHwayServicesManager
 from lola_kraken_services import LolaKrakenServicesManager
