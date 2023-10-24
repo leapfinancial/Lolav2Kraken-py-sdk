@@ -1,5 +1,5 @@
 
-from lolakrakenpy.lola_kraken_hway_services import lolahwayservicesmanager
+from lolakrakenpy.lola_kraken_hway_services import lolaHwayServicesManager
 
 
 
@@ -12,11 +12,12 @@ class LolaKrakenServicesManager:
         self.lola_kraken_url = lola_kraken_url 
         self.session = session
        
-        self.hwayServices = lolahwayservicesmanager(self.session['lead'], self.lola_token, self.lola_kraken_url)
+        self.hwayServices = lolaHwayServicesManager(self.session['lead'], self.lola_token, self.lola_kraken_url)
         
 
         # TODO
         # history
         # services
-
+    def set_session(self, session):
+        self.session.set(session)   
     
