@@ -7,8 +7,8 @@ class LolaHwayServicesManager:
         self.lola_kraken_url = lola_kraken_url 
         
 
-    def validatePhone(self):    
-        url = f'{self.lola_kraken_url}/hway/is-phone-available/+12015600073'
+    def validatePhone(self, phone):    
+        url = f'{self.lola_kraken_url}/hway/is-phone-available/{phone}'
         headers = {'x-lola-auth': self.lola_token}
         response = requests.get(url, headers=headers)
         response.raise_for_status()
