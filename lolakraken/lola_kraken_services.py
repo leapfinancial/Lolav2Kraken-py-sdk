@@ -1,5 +1,5 @@
 
-from lolakraken.lola_kraken_hway_services import lola_hway_services_manager
+from lolakraken.lola_kraken_hway_services import lolahwayservicesmanager
 
 
 
@@ -12,7 +12,7 @@ class LolaKrakenServicesManager:
         self.prompter_url = lola_kraken_url 
         self.session = session
        
-        self.hwayServices = lola_hway_services_manager(self.session['lead'], self.lola_token, self.lola_kraken_url)
+        self.hwayServices = lolahwayservicesmanager(self.session['lead'], self.lola_token, self.lola_kraken_url)
         
 
         # TODO
