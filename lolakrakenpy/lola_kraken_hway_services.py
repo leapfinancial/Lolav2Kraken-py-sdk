@@ -2,10 +2,10 @@ import requests
 
 class LolaHwayServicesManager:
 
-    def __init__(self, lead, lola_token, lola_kraken_url):
+    def __init__(self, lola_token, lola_kraken_url):
         self.lola_token = lola_token
         self.lola_kraken_url = lola_kraken_url 
-        self.lead = lead
+        
 
     def validatePhone(self, phone):    
         url = f'{self.lola_kraken_url}/hway/is-phone-available/{phone}'

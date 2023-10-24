@@ -12,7 +12,7 @@ class LolaKrakenServicesManager:
         self.lola_kraken_url = lola_kraken_url 
         self.session = session
        
-        self.hwayServices = LolaHwayServicesManager(self.session, self.lola_token, self.lola_kraken_url)
+        self.hwayServices = LolaHwayServicesManager( self.lola_token, self.lola_kraken_url)
         
 
         # TODO
