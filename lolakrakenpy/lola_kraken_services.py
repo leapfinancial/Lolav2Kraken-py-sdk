@@ -19,5 +19,5 @@ class LolaKrakenServicesManager:
         # history
         # services
     def set_session(self, session):
-        self.session.set(session)   
+        self.session = session   
     
