@@ -1,6 +1,6 @@
 import requests
 
-class lola_hway_services_manager:
+class lolahwayservicesmanager:
 
     def __init__(self, lead, lola_token, lola_kraken_url):
         self.lola_token = lola_token
