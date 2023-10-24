@@ -5,7 +5,7 @@ from lolakraken.lola_kraken_hway_services import lola_hway_services_manager
 
 
 
-class LolaContext:
+class LolaKrakenServicesManager:
 
     def __init__(self, session, lola_token, lola_kraken_url):
         self.lola_token = lola_token
