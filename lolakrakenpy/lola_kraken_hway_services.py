@@ -16,7 +16,7 @@ class LolaHwayServicesManager:
             response.raise_for_status()
             return response.json()
         except Exception as error:
-            print("error in service /hway/is-phone-available/" + error)
+            print("error in service /hway/is-phone-available/ " + str(error))
             return Exception(error)
             
     
