@@ -16,7 +16,7 @@ dependencies = [
   'schedule>=1.2.0',  
   'requests>=2.27.1',
   'undefined>=0.0.8',
-  'pydantic>=2.4.0'
+  'pydantic>=2.4.0',
 ]
 
 [build-system]
