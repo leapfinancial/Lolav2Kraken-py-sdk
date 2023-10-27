@@ -1,5 +1,5 @@
 import requests
-_undef = object()
+import undefined
 class LolaVisionServicesManager:
 
     def __init__(self, session,lola_token, lola_kraken_url):
@@ -14,7 +14,7 @@ class LolaVisionServicesManager:
         self.lola_token = lola_token
         self.lola_kraken_url = lola_kraken_url 
         self.session = session
-    def scanGenericId(self, url=_undef, image=_undef):
+    def scanGenericId(self, url=undefined, image=undefined):
         """
         Scans a generic ID from an image or URL.
 
@@ -30,16 +30,16 @@ class LolaVisionServicesManager:
         """
         
         try:
-            if url is _undef and image is _undef:
+            if url is undefined and image is undefined:
                 raise ValueError('Either url or image must be provided')
 
             endpoint = f'{self.lola_kraken_url}/vision/process/id/generic'
             headers = {'x-lola-auth': self.lola_token, 'Content-Type': 'application/json'}
-             
-            data = {
+           
+            data ={
                 'url': url,
                 'imgBase64': image
-            }       
+            }   
             
             print(data)
             response = requests.post(endpoint, headers=headers, json=data)
