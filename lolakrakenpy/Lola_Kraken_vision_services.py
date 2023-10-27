@@ -31,7 +31,7 @@ class LolaVisionServicesManager:
         if url is None and image is None:
             raise ValueError('Either url or image must be provided')
 
-        endpoint = f'{self.prompter_url}/vision/generic_id'
+        endpoint = f'{self.lola_kraken_url}/vision/generic_id'
         headers = {'x-lola-auth': self.lola_token, 'Content-Type': 'application/json'}
 
         data = {
