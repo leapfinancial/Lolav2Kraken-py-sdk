@@ -1,5 +1,6 @@
 import requests
 import undefined
+from lolakrakenpy.Lola_kraken_utils import LolaKrakenUtils
 class LolaVisionServicesManager:
 
     def __init__(self, session,lola_token, lola_kraken_url):
@@ -40,7 +41,7 @@ class LolaVisionServicesManager:
                 'url': url,
                 'imgBase64': image
             }   
-            
+            data = LolaKrakenUtils.deleteKeyundefined(data);
             print(data)
             response = requests.post(endpoint, headers=headers, json=data)
             response.raise_for_status()
