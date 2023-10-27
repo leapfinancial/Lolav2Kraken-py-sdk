@@ -38,7 +38,7 @@ class LolaVisionServicesManager:
 
             data = {
                 'url': url,
-                'image': image
+                'imgBase64': image
             }
             print(data)
             response = requests.post(endpoint, headers=headers, json=data)
