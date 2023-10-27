@@ -6,7 +6,7 @@ class LolaKrakenUtils:
     def __init__(self):
         pass
         
-    def deleteKeyundefined(json):
+    def deleteKeyUndefined(json):
         """
          Deletes the keys in value undefined.
 
