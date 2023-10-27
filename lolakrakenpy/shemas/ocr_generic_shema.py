@@ -1,6 +1,6 @@
 
 from pydantic import BaseModel
 
-class OcrGeneric(BaseModel):
+class OcrGenericSchema(BaseModel):
     url: str = None
     imgBase64: str = None

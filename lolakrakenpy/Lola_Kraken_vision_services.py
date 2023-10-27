@@ -1,7 +1,7 @@
 import requests
 import undefined
 from lolakrakenpy.Lola_kraken_utils import LolaKrakenUtils
-from lolakrakenpy.shemas.ocr_generic_shema import OcrGeneric
+from lolakrakenpy.shemas.ocr_generic_shema import OcrGenericSchema
 
 class LolaVisionServicesManager:
 
@@ -47,7 +47,7 @@ class LolaVisionServicesManager:
             }   
             data = LolaKrakenUtils.deleteKeyUndefined(data)
             """""
-            data = OcrGeneric(url=url, imgBase64=image).dict(exclude_none=True)
+            data = OcrGenericSchema(url=url, imgBase64=image).dict(exclude_none=True)
             print(data)
             response = requests.post(endpoint, headers=headers, json=data)
             response.raise_for_status()
