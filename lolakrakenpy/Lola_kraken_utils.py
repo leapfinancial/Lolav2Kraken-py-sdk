@@ -1,7 +1,7 @@
 import undefined
 
 
-class LolaVisionServicesManager:
+class LolaKrakenUtils:
     
     def __init__(self):
         pass
