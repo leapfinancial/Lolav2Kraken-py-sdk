@@ -38,7 +38,10 @@ class LolaVisionServicesManager:
 
             endpoint = f'{self.lola_kraken_url}/vision/process/id/generic'
             headers = {'x-lola-auth': self.lola_token, 'Content-Type': 'application/json'}
-
+            data ={
+                'url': url,
+                'imgBase64': image
+            }   
             
             """""
             data ={
@@ -47,7 +50,7 @@ class LolaVisionServicesManager:
             }   
             data = LolaKrakenUtils.deleteKeyUndefined(data)
             """""
-            data = OcrGenericSchema(url=url, imgBase64=image).dict(exclude_none=True)
+            data = OcrGenericSchema(**data)
             print(data)
             response = requests.post(endpoint, headers=headers, json=data)
             response.raise_for_status()
