@@ -17,7 +17,7 @@ class LolaVisionServicesManager:
         self.lola_token = lola_token
         self.lola_kraken_url = lola_kraken_url 
         self.session = session
-    def scanGenericId(self, url=undefined, image=undefined):
+    def scanGenericId(self, url=None, image=None):
         """
         Scans a generic ID from an image or URL.
 
@@ -33,7 +33,7 @@ class LolaVisionServicesManager:
         """
         
         try:
-            if url is undefined and image is undefined:
+            if url is None and image is None:
                 raise ValueError('Either url or image must be provided')
 
             endpoint = f'{self.lola_kraken_url}/vision/process/id/generic'
