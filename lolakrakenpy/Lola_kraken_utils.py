@@ -8,7 +8,7 @@ class LolaKrakenUtils:
         
     def deleteKeyundefined(self, json):
         """
-         Deletes the key value undefined from a JSON object.
+         Deletes the keys in value undefined.
 
         Args:
             json (dict): The JSON object.
@@ -16,7 +16,8 @@ class LolaKrakenUtils:
         Returns:
             dict: The JSON object without the key undefined.
         """
-        if undefined in json:
-            del json[undefined]
+        for key in list(json.keys()):
+            if json[key] is undefined:
+                del json[key]
         return json
         
