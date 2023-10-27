@@ -1,6 +1,6 @@
 
 from lolakrakenpy.lola_kraken_hway_services import LolaHwayServicesManager
-
+from lolakrakenpy.Lola_Kraken_vision_services import LolaVisionServicesManager
 
 
 
@@ -13,7 +13,7 @@ class LolaKrakenServicesManager:
         self.session = session
        
         self.hwayServices = LolaHwayServicesManager( self.session,self.lola_token, self.lola_kraken_url)
-        
+        self.visionServices = LolaVisionServicesManager( self.session,self.lola_token, self.lola_kraken_url)
 
         # TODO
         # history
