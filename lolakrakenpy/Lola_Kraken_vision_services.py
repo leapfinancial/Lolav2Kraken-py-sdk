@@ -50,7 +50,7 @@ class LolaVisionServicesManager:
             }   
             data = LolaKrakenUtils.deleteKeyUndefined(data)
             """""
-            data = OcrGenericSchema(**data)
+            data = OcrGenericSchema(**data).dict(exclude_none=True)
             print(data)
             response = requests.post(endpoint, headers=headers, json=data)
             response.raise_for_status()
