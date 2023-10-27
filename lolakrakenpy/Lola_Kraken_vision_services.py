@@ -28,19 +28,25 @@ class LolaVisionServicesManager:
         Returns:
             dict: The response JSON.
         """
-        if url is None and image is None:
-            raise ValueError('Either url or image must be provided')
+        
+        try:
+            if url is None and image is None:
+                raise ValueError('Either url or image must be provided')
 
-        endpoint = f'{self.lola_kraken_url}/vision/process/id/generic'
-        headers = {'x-lola-auth': self.lola_token, 'Content-Type': 'application/json'}
+            endpoint = f'{self.lola_kraken_url}/vision/process/id/generic'
+            headers = {'x-lola-auth': self.lola_token, 'Content-Type': 'application/json'}
 
-        data = {
-            'url': url,
-            'image': image
-        }
-
-        response = requests.post(endpoint, headers=headers, json=data)
-        response.raise_for_status()
-        return response.json()
+            data = {
+                'url': url,
+                'image': image
+            }
+            print(data)
+            response = requests.post(endpoint, headers=headers, json=data)
+            response.raise_for_status()
+            return response.json()
+        except Exception as e:
+            print(e)
+            raise ValueError(e)
+        
             
     
