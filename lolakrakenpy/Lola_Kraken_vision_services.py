@@ -14,7 +14,7 @@ class LolaVisionServicesManager:
         self.lola_token = lola_token
         self.lola_kraken_url = lola_kraken_url 
         self.session = session
-    def scanGenericId(self, url=None, image=None):
+    def scanGenericId(self, url=undefined, image=None):
         """
         Scans a generic ID from an image or URL.
 
@@ -35,11 +35,15 @@ class LolaVisionServicesManager:
 
             endpoint = f'{self.lola_kraken_url}/vision/process/id/generic'
             headers = {'x-lola-auth': self.lola_token, 'Content-Type': 'application/json'}
-
-            data = {
-                'url': url,
-                'imgBase64': image
-            }
+            if url is not None:
+                data = {
+                    'url': url
+                }
+            if image is not None:
+                data = {                    
+                    'imgBase64': image
+                }    
+            
             print(data)
             response = requests.post(endpoint, headers=headers, json=data)
             response.raise_for_status()
