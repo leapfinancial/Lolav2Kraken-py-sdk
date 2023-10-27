@@ -1,7 +1,7 @@
 import requests
 import undefined
 from lolakrakenpy.Lola_kraken_utils import LolaKrakenUtils
-from lolakrakenpy.shemas.ocr_generic_shema import OcrGenericShema
+from lolakrakenpy.shemas.ocr_generic_shema import OcrGeneric
 
 class LolaVisionServicesManager:
 
