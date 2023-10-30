@@ -52,7 +52,7 @@ class LolaVisionServicesManager:
             }   
             data = LolaKrakenUtils.deleteKeyUndefined(data)
             """""
-            data = OcrGenericSchema(**data).model_dump_json(exclude_none=True)
+            data = OcrGenericSchema(**data).model_dump(exclude_none=True)
             print(data)
             response = requests.post(endpoint, headers=headers, json=data)
             response.raise_for_status()
@@ -86,8 +86,8 @@ class LolaVisionServicesManager:
                 'image_url': url,
                 'image_b64': image
             }   
-            
-            data = FaceCropSchema(**data).model_dump_json(exclude_none=True)
+            print(data)
+            data = FaceCropSchema(**data).model_dump(exclude_none=True)
             print(data)
             response = requests.post(endpoint, headers=headers, json=data)
             response.raise_for_status()
@@ -126,7 +126,7 @@ class LolaVisionServicesManager:
                 'image2_b64': image2
             }   
             
-            data = FaceMatchSchema(**data).model_dump_json(exclude_none=True)
+            data = FaceMatchSchema(**data).model_dump(exclude_none=True)
             print(data)
             response = requests.post(endpoint, headers=headers, json=data)
             response.raise_for_status()
