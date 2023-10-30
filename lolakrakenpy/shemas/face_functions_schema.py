@@ -9,12 +9,12 @@ class FaceCropSchema(BaseModel):
     enableEncodings: bool | None=None   
 
 class FaceMatchSchema(BaseModel):
-    tracerId: str | None
-    session: object | None
-    image1: object | None
-    image1_b64: str | None
-    image1_url: str | None
-    image2: object | None
-    image2_b64: str | None
-    image2_url: str | None
-    enableEncodings: bool | None
+    tracerId: str | None =None
+    session: object | None =None
+    image1: object | None =None
+    image1_b64: str | None =None
+    image1_url: str | None =None
+    image2: object | None =None
+    image2_b64: str | None =None
+    image2_url: str | None =None
+    enableEncodings: bool | None =None
