@@ -84,7 +84,7 @@ class LolaVisionServicesManager:
             headers = {'x-lola-auth': self.lola_token, 'Content-Type': 'application/json'}
             data ={
                 'image_url': url,
-                'image_b64': image
+                # 'image_b64': image
             }   
             print(data)
             data = FaceCropSchema(**data).model_dump(exclude_none=True)

@@ -1,12 +1,12 @@
 from pydantic import BaseModel
 
 class FaceCropSchema(BaseModel):
-    tracerId: str | None
-    session: object | None
-    image: object | None
-    image_b64: str | None
+    # tracerId: str | None
+    # session: object | None
+    # image: object | None
+    # image_b64: str | None
     image_url: str | None
-    enableEncodings: bool | None
+    # enableEncodings: bool | None
 
 class FaceMatchSchema(BaseModel):
     tracerId: str | None
