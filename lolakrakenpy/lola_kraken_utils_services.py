@@ -15,7 +15,7 @@ class LolaUtilsServicesManager:
             dict: The response JSON.
         """
         try:
-            chatlead = self.session['chatlead']
+            chatlead = self.session['lead']
             sessionStore = sessionStore
             
             endpoint = f'{self.lola_kraken_url}/utils/claim/token'
