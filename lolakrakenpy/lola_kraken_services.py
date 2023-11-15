@@ -7,7 +7,7 @@ from lolakrakenpy.lola_kraken_utils_services import LolaUtilsServicesManager
 
 class LolaKrakenServicesManager:
 
-    def __init__(self, session, lola_token, lola_kraken_url):
+    def __init__(self, session:dict, lola_token, lola_kraken_url):
         
         self.lola_token = lola_token
         self.lola_kraken_url = lola_kraken_url 
