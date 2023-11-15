@@ -30,7 +30,7 @@ class LolaUtilsServicesManager:
             data = claimTokenSchema(**data).model_dump(exclude_none=True)
             response = requests.post(endpoint, headers=headers, json=data)
             response.raise_for_status()"""
-            return session
+            return self.session
         
         except Exception as e:
             raise ValueError(e)
