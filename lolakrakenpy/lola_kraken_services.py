@@ -1,6 +1,6 @@
 
 from lolakrakenpy.lola_kraken_hway_services import LolaHwayServicesManager
-from lolakrakenpy.lola_Kraken_vision_services import LolaVisionServicesManager
+from lolakrakenpy.Lola_Kraken_vision_services import LolaVisionServicesManager
 from lolakrakenpy.lola_kraken_utils_services import LolaUtilsServicesManager
 
 
