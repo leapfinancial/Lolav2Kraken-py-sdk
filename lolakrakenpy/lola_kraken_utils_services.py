@@ -16,6 +16,7 @@ class LolaUtilsServicesManager:
         """
         try:
             session = self.session
+            print(session)
             chatlead = session['lead']
             sessionStore = sessionStore
             
