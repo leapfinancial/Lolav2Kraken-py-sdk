@@ -17,7 +17,7 @@ class LolaUtilsServicesManager:
         try:
             session = self.session
             print(session)
-            chatlead = session['lead']
+            """chatlead = session['lead']
             sessionStore = sessionStore
             
             endpoint = f'{self.lola_kraken_url}/utils/claim/token'
@@ -29,7 +29,8 @@ class LolaUtilsServicesManager:
             }
             data = claimTokenSchema(**data).model_dump(exclude_none=True)
             response = requests.post(endpoint, headers=headers, json=data)
-            response.raise_for_status()
-            return response.json()
+            response.raise_for_status()"""
+            return session
+        
         except Exception as e:
             raise ValueError(e)
