@@ -20,5 +20,8 @@ class LolaKrakenServicesManager:
         # history
         # services
     def start(self, session):
-        self.session = session   
+        self.session = session
+        self.hwayServices = LolaHwayServicesManager( self.session,self.lola_token, self.lola_kraken_url)
+        self.visionServices = LolaVisionServicesManager( self.session,self.lola_token, self.lola_kraken_url)
+        self.utilsServices = LolaUtilsServicesManager( self.session,self.lola_token, self.lola_kraken_url)   
     
