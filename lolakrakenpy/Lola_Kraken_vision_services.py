@@ -61,7 +61,7 @@ class LolaVisionServicesManager:
             print(e)
             raise ValueError(e)
         
-    def scanGenericDocument(self, url=None, image=None):
+    def scanGenericDocumentInvoice(self, url=None, image=None):
         """
         Scans a generic ID from an image or URL.
 
