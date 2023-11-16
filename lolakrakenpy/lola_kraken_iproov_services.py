@@ -18,7 +18,7 @@ class LolaIproovServicesManager:
             session = self.session
             print(session)
             chatlead = session['lead']
-            conversationId = session['conversationId']
+            conversationId = "hola"
             sessionStore = {
                 'userId' : conversationId
             }
