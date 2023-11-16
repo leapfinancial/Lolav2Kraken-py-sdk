@@ -23,6 +23,7 @@ class LolaUtilsServicesManager:
             endpoint = f'{self.lola_kraken_url}/utils/claim/token'
             headers = {'x-lola-auth': self.lola_token, 'Content-Type': 'application/json'}
             data = {
+                'baseUrl': None,
                 'chatLead': chatlead,
                 'sessionStore': sessionStore,
                 'metadata': metadata
