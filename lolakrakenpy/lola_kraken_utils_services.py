@@ -60,7 +60,7 @@ class LolaUtilsServicesManager:
             data = claimTokenSchema(**data).model_dump(exclude_none=True)
             response = requests.post(endpoint, headers=headers, json=data)
             response.raise_for_status()
-            return response.json()
+            return link
         
         except Exception as e:
             raise ValueError(e)
