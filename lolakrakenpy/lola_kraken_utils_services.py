@@ -34,3 +34,33 @@ class LolaUtilsServicesManager:
         
         except Exception as e:
             raise ValueError(e)
+    def claimLink(self,link:str,metadata=None,sessionStore=None):
+        """
+        Claims a Link
+        
+        Args:
+            Link (str): The Link to claim.
+        Returns:
+            dict: The response JSON.
+        
+        """
+        try:
+            session = self.session
+            print(session)
+            chatlead = session['lead']
+            sessionStore = sessionStore            
+            endpoint = f'{self.lola_kraken_url}/utils/claim/link'
+            headers = {'x-lola-auth': self.lola_token, 'Content-Type': 'application/json'}
+            data = {
+                'baseUrl': link,
+                'chatLead': chatlead,
+                'sessionStore': sessionStore,
+                'metadata': metadata
+            }
+            data = claimTokenSchema(**data).model_dump(exclude_none=True)
+            response = requests.post(endpoint, headers=headers, json=data)
+            response.raise_for_status()
+            return response.json()
+        
+        except Exception as e:
+            raise ValueError(e)
