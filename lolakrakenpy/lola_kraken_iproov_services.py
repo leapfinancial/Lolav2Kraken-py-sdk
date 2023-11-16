@@ -1,12 +1,12 @@
 import requests
-from lolakrakenpy.shemas.utils_shema import claimTokenSchema
+from lolakrakenpy.shemas.iproov_shema import claimTokenSchema
 
-class LolaUtilsServicesManager:
+class LolaIproovServicesManager:
     def __init__(self, session, lola_token, lola_kraken_url):
         self.lola_token = lola_token
         self.lola_kraken_url = lola_kraken_url
         self.session = session
-    def claimToken(self, metadata=None,sessionStore=None):
+    def claimToken(self,returnUrl:str,theme:None):
         """
         Claims a token.
         Args:
@@ -18,9 +18,23 @@ class LolaUtilsServicesManager:
             session = self.session
             print(session)
             chatlead = session['lead']
+            conversationId = chatlead['conversationId']
+            ## conersationid to str
+            conversationId = str(conversationId)
+            sessionStore = {
+                'userId' : conversationId
+            }
+            metadata = {
+                'returnURL': returnUrl,
+                'operation': 'enrol',
+                'assuranceType': 'genuine_presence',
+                'lolaURL': self.lola_kraken_url,
+                'theme': theme
+            }
+            
             sessionStore = sessionStore
             
-            endpoint = f'{self.lola_kraken_url}/utils/claim/token'
+            endpoint = f'{self.lola_kraken_url}/pol/claim/token'
             headers = {'x-lola-auth': self.lola_token, 'Content-Type': 'application/json'}
             data = {
                 'baseUrl': None,
@@ -35,7 +49,7 @@ class LolaUtilsServicesManager:
         
         except Exception as e:
             raise ValueError(e)
-    def claimLink(self,link:str,metadata=None,sessionStore=None):
+    def claimLink(self,returnUrl:str,theme:None,sessionStore=None):
         """
         Claims a Link
         
@@ -49,11 +63,25 @@ class LolaUtilsServicesManager:
             session = self.session
             print(session)
             chatlead = session['lead']
+            conversationId = chatlead['conversationId']
+            sessionStore = {
+                'userId' : conversationId
+            }
+            metadata = {
+                'returnURL': returnUrl,
+                'operation': 'enrol',
+                'assuranceType': 'genuine_presence',
+                'lolaURL': self.lola_kraken_url,
+                'theme': theme
+            }
+            session = self.session
+            print(session)
+            chatlead = session['lead']
             sessionStore = sessionStore            
-            endpoint = f'{self.lola_kraken_url}/utils/claim/link'
+            endpoint = f'{self.lola_kraken_url}/pol/claim/link'
             headers = {'x-lola-auth': self.lola_token, 'Content-Type': 'application/json'}
             data = {
-                'baseUrl': link,
+                'baseUrl': None,
                 'chatLead': chatlead,
                 'sessionStore': sessionStore,
                 'metadata': metadata
