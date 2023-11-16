@@ -6,7 +6,7 @@ class LolaIproovServicesManager:
         self.lola_token = lola_token
         self.lola_kraken_url = lola_kraken_url
         self.session = session
-    def claimToken(self,returnUrl:str,theme:None, metadata=None,sessionStore=None):
+    def claimToken(self,returnUrl:str,theme:None,sessionStore=None):
         """
         Claims a token.
         Args:
