@@ -6,7 +6,7 @@ class LolaIproovServicesManager:
         self.lola_token = lola_token
         self.lola_kraken_url = lola_kraken_url
         self.session = session
-    def claimToken(self,returnUrl:str,theme:None,sessionStore=None):
+    def claimToken(self,returnUrl:str,theme:None):
         """
         Claims a token.
         Args:
@@ -49,7 +49,7 @@ class LolaIproovServicesManager:
         
         except Exception as e:
             raise ValueError(e)
-    def claimLink(self,link:str,metadata=None,sessionStore=None):
+    def claimLink(self,returnUrl:str,theme:None,sessionStore=None):
         """
         Claims a Link
         
@@ -63,11 +63,24 @@ class LolaIproovServicesManager:
             session = self.session
             print(session)
             chatlead = session['lead']
+            conversationId = chatlead['conversationId']
+            sessionStore = {
+                'userId' : conversationId
+            }
+            metadata = {
+                'returnURL': returnUrl,
+                'operation': 'enrol',
+                'assuranceType': 'genuine_presence',
+                'lolaURL': self.lola_kraken_url,
+                'theme': theme
+            }
+            session = self.session
+            print(session)
+            chatlead = session['lead']
             sessionStore = sessionStore            
             endpoint = f'{self.lola_kraken_url}/utils/claim/link'
             headers = {'x-lola-auth': self.lola_token, 'Content-Type': 'application/json'}
             data = {
-                'baseUrl': link,
                 'chatLead': chatlead,
                 'sessionStore': sessionStore,
                 'metadata': metadata
