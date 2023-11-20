@@ -66,7 +66,7 @@ class LolaIproovServicesManager:
             chatlead = session['lead']
             conversationId = chatlead['conversationId']
             if develoment:
-                conversationId = uuid.uuid4()
+                conversationId = str(uuid.uuid4())
             sessionStore = {
                 'userId' : conversationId
             }
