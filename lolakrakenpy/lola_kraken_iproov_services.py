@@ -1,3 +1,4 @@
+import uuid
 import requests
 from lolakrakenpy.shemas.iproov_shema import claimTokenSchema
 
@@ -49,7 +50,7 @@ class LolaIproovServicesManager:
         
         except Exception as e:
             raise ValueError(e)
-    def claimLink(self,returnUrl:str,theme:None,sessionStore=None):
+    def claimLink(self,returnUrl:str,theme:None,sessionStore=None,develoment:bool=False):
         """
         Claims a Link
         
@@ -64,6 +65,8 @@ class LolaIproovServicesManager:
             print(session)
             chatlead = session['lead']
             conversationId = chatlead['conversationId']
+            if develoment:
+                conversationId = uuid.uuid4()
             sessionStore = {
                 'userId' : conversationId
             }
