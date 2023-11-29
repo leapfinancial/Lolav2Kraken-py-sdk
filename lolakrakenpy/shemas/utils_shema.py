@@ -6,3 +6,9 @@ class claimTokenSchema(BaseModel):
     chatLead: object | None
     sessionStore: object  | None
     metadata: object | None
+    
+class validateAddressSchema(BaseModel):
+    baseUrl: str | None
+    chatLead: object | None
+    sessionStore: object  | None
+    metadata: object | None
