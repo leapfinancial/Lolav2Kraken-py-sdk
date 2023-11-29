@@ -12,6 +12,10 @@ class LolaKrakenServicesManager:
         self.lola_token = lola_token
         self.lola_kraken_url = lola_kraken_url 
         self.session = session
+        print("initilizing lola kraken services manager")
+        print(f"session: {self.session}")
+        print(f"lola_token: {self.lola_token}")
+        print(f"lola_kraken_url: {self.lola_kraken_url}")
        
         # TODO
         # history
