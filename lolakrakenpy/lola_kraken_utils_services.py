@@ -74,13 +74,10 @@ class LolaUtilsServicesManager:
             dict: The response JSON.
         """
         try:        
-            endpoint = f'{self.lola_kraken_url}/utils/verify-address'
+            endpoint = f'{self.lola_kraken_url}/utils/verify-address/{address}'
             headers = {'x-lola-auth': self.lola_token, 'Content-Type': 'application/json'}
-            data = {
-                'address': address,
-            }
-            data = validateAddressSchema(**data).model_dump(exclude_none=True)
-            response = requests.post(endpoint, headers=headers, json=data)
+            
+            response = requests.get(endpoint, headers=headers)
             response.raise_for_status()
             return response.json()
         
