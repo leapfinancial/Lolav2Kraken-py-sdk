@@ -9,28 +9,29 @@ class LolaKrakenServicesManager:
 
     _instance = None
 
-    def __new__(cls):
+    def __new__(cls, *args, **kwargs):
         if not cls._instance:
             cls._instance = super().__new__(cls)
+        # Aquí es donde se inicializan los atributos
+            cls._instance.session = kwargs.get('session')
+            cls._instance.lola_token = kwargs.get('lola_token')
+            cls._instance.lola_kraken_url = kwargs.get('lola_kraken_url')
         return cls._instance
+    @staticmethod
+    def getInstance():
+        if not LolaKrakenServicesManager._instance:
+            raise Exception("LolaKrakenServicesManager not initialized")
+        return LolaKrakenServicesManager._instance
     
-    def __init__(self, session:dict, lola_token, lola_kraken_url):
-        
-        self.lola_token = lola_token
-        self.lola_kraken_url = lola_kraken_url 
-        self.session = session
-        print("initilizing lola kraken services manager")
-        print(f"session: {self.session}")
-        print(f"lola_token: {self.lola_token}")
-        print(f"lola_kraken_url: {self.lola_kraken_url}")
        
         # TODO
         # history
         # services
-    def start(self, session):
-        self.session = session
-        self.hwayServices = LolaHwayServicesManager( self.session,self.lola_token, self.lola_kraken_url)
-        self.visionServices = LolaVisionServicesManager( self.session,self.lola_token, self.lola_kraken_url)
-        self.utilsServices = LolaUtilsServicesManager( self.session,self.lola_token, self.lola_kraken_url)
-        self.iproovServices = LolaIproovServicesManager( self.session,self.lola_token, self.lola_kraken_url)   
+    @classmethod
+    def start(cls, session):
+        cls._instance.session = session
+        cls._instance.hwayServices = LolaHwayServicesManager( cls._instance.session,cls._instance.lola_token, cls._instance.lola_kraken_url)
+        cls._instance.visionServices = LolaVisionServicesManager( cls._instance.session,cls._instance.lola_token, cls._instance.lola_kraken_url)
+        cls._instance.utilsServices = LolaUtilsServicesManager( cls._instance.session,cls._instance.lola_token, cls._instance.lola_kraken_url)
+        cls._instance.iproovServices = LolaIproovServicesManager( cls._instance.session,cls._instance.lola_token, cls._instance.lola_kraken_url)   
     
