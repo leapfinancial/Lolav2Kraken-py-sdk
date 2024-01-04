@@ -7,6 +7,13 @@ from lolakrakenpy.lola_kraken_iproov_services import LolaIproovServicesManager
 
 class LolaKrakenServicesManager:
 
+    _instance = None
+
+    def __new__(cls):
+        if not cls._instance:
+            cls._instance = super().__new__(cls)
+        return cls._instance
+    
     def __init__(self, session:dict, lola_token, lola_kraken_url):
         
         self.lola_token = lola_token
