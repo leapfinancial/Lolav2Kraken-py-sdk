@@ -1,12 +1,14 @@
 import requests
-from lolakrakenpy.shemas.utils_shema import claimTokenSchema, validateAddressSchema
+from lolakrakenpy.shemas.utils_shema import SendNotificationSchema, claimTokenSchema, validateAddressSchema
+
 
 class LolaUtilsServicesManager:
     def __init__(self, session, lola_token, lola_kraken_url):
         self.lola_token = lola_token
         self.lola_kraken_url = lola_kraken_url
         self.session = session
-    def claimToken(self, metadata=None,sessionStore=None):
+
+    def claimToken(self, metadata=None, sessionStore=None):
         """
         Claims a token.
         Args:
@@ -19,9 +21,12 @@ class LolaUtilsServicesManager:
             print(session)
             chatlead = session['lead']
             sessionStore = sessionStore
-            
+
             endpoint = f'{self.lola_kraken_url}/utils/claim/token'
-            headers = {'x-lola-auth': self.lola_token, 'Content-Type': 'application/json'}
+            headers = {
+                'x-lola-auth': self.lola_token,
+                'Content-Type': 'application/json'
+            }
             data = {
                 'baseUrl': None,
                 'chatLead': chatlead,
@@ -32,26 +37,30 @@ class LolaUtilsServicesManager:
             response = requests.post(endpoint, headers=headers, json=data)
             response.raise_for_status()
             return response.json()
-        
+
         except Exception as e:
             raise ValueError(e)
-    def claimLink(self,link:str,metadata=None,sessionStore=None):
+
+    def claimLink(self, link: str, metadata=None, sessionStore=None):
         """
         Claims a Link
-        
+
         Args:
             Link (str): The Link to claim.
         Returns:
             dict: The response JSON.
-        
+
         """
         try:
             session = self.session
             print(session)
             chatlead = session['lead']
-            sessionStore = sessionStore            
+            sessionStore = sessionStore
             endpoint = f'{self.lola_kraken_url}/utils/claim/link'
-            headers = {'x-lola-auth': self.lola_token, 'Content-Type': 'application/json'}
+            headers = {
+                'x-lola-auth': self.lola_token,
+                'Content-Type': 'application/json'
+            }
             data = {
                 'baseUrl': link,
                 'chatLead': chatlead,
@@ -62,10 +71,11 @@ class LolaUtilsServicesManager:
             response = requests.post(endpoint, headers=headers, json=data)
             response.raise_for_status()
             return response.json()
-        
+
         except Exception as e:
             raise ValueError(e)
-    def validateAddress(self, address:str):
+
+    def validateAddress(self, address: str):
         """
         Validates an address.
         Args:
@@ -73,13 +83,47 @@ class LolaUtilsServicesManager:
         Returns:
             dict: The response JSON.
         """
-        try:        
+        try:
             endpoint = f'{self.lola_kraken_url}/utils/verify-address/{address}'
-            headers = {'x-lola-auth': self.lola_token, 'Content-Type': 'application/json'}
-            
+            headers = {
+                'x-lola-auth': self.lola_token,
+                'Content-Type': 'application/json'
+            }
+
             response = requests.get(endpoint, headers=headers)
             response.raise_for_status()
             return response.json()
-        
+
+        except Exception as e:
+            raise ValueError(e)
+
+    def sendNotification(self, reqToken: str, label: str, payload):
+        """
+        Validates an address.
+        Args:
+            reqToken (str): Token with basic user data.
+            label (str): Label of the notification.
+            payload (object): Payload of the notification.
+        Returns:
+            dict: The response JSON.
+        """
+        try:
+            endpoint = f'{self.lola_kraken_url}/utils/sendnotification'
+            headers = {
+                'x-lola-auth': self.lola_token,
+                'Content-Type': 'application/json',
+                'x-notification-token': reqToken
+            }
+
+            data = {
+                'label': label,
+                'payload': payload
+            }
+            data = SendNotificationSchema(**data).model_dump(exclude_none=True)
+
+            response = requests.post(endpoint, headers=headers, json=data)
+            response.raise_for_status()
+            return response.json()
+
         except Exception as e:
             raise ValueError(e)
