@@ -50,7 +50,7 @@ class LolaIproovServicesManager:
         
         except Exception as e:
             raise ValueError(e)
-    def claimLink(self,returnUrl:str,theme:None,sessionStore=None,develoment:bool=False):
+    def claimLink(self,returnUrl:str,theme:None,sessionStore=None,develoment:bool=False,assuranceType = 'genuine_presence'):
         """
         Claims a Link
         
@@ -73,7 +73,7 @@ class LolaIproovServicesManager:
             metadata = {
                 'returnURL': returnUrl,
                 'operation': 'enrol',
-                'assuranceType': 'genuine_presence',
+                'assuranceType': assuranceType,
                 'lolaURL': self.lola_kraken_url,
                 'theme': theme
             }
