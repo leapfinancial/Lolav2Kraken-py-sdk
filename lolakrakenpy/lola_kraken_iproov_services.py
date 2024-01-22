@@ -50,7 +50,7 @@ class LolaIproovServicesManager:
         
         except Exception as e:
             raise ValueError(e)
-    def claimLink(self,returnUrl:str,theme:None,sessionStore=None,develoment:bool=False,assuranceType = 'genuine_presence'):
+    def claimLink(self,returnUrl:str,theme:None,sessionStore=None,develoment:bool=False,assuranceType = 'liveness'):
         """
         Claims a Link
         
