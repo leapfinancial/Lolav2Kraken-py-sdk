@@ -2,8 +2,14 @@
 from pydantic import BaseModel
 
 
-class claimTokenSchema(BaseModel):
+class claimTokenUrlSchema(BaseModel):
     baseUrl: str | None
+    chatLead: object | None
+    sessionStore: object | None
+    metadata: object | None
+    extraData : object | None
+    
+class claimTokenSchema(BaseModel):
     chatLead: object | None
     sessionStore: object | None
     metadata: object | None

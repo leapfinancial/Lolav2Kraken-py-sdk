@@ -1,5 +1,5 @@
 import requests
-from lolakrakenpy.shemas.utils_shema import RequestExtradataParams, SendNotificationSchema, claimTokenSchema, validateAddressSchema
+from lolakrakenpy.shemas.utils_shema import RequestExtradataParams, SendNotificationSchema, claimTokenSchema,claimTokenUrlSchema, validateAddressSchema
 
 
 class LolaUtilsServicesManager:
@@ -28,7 +28,6 @@ class LolaUtilsServicesManager:
                 'Content-Type': 'application/json'
             }
             data = {
-                'baseUrl': None,
                 'chatLead': chatlead,
                 'sessionStore': sessionStore,
                 'metadata': metadata
@@ -65,9 +64,10 @@ class LolaUtilsServicesManager:
                 'baseUrl': link,
                 'chatLead': chatlead,
                 'sessionStore': sessionStore,
-                'metadata': metadata
+                'metadata': metadata,
+                'extraData': extraData
             }
-            data = claimTokenSchema(**data).model_dump(exclude_none=True)
+            data = claimTokenUrlSchema(**data).model_dump(exclude_none=True)
             response = requests.post(endpoint, headers=headers, json=data)
             response.raise_for_status()
             return response.json()
