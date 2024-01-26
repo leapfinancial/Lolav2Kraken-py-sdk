@@ -41,7 +41,7 @@ class LolaUtilsServicesManager:
         except Exception as e:
             raise ValueError(e)
 
-    def claimLink(self, link: str, metadata=None, sessionStore=None):
+    def claimLink(self, link: str, metadata=None, sessionStore=None,extraData=None):
         """
         Claims a Link
 
@@ -110,7 +110,6 @@ class LolaUtilsServicesManager:
         try:
             endpoint = f'{self.lola_kraken_url}/utils/sendnotification'
             headers = {
-                'x-lola-auth': self.lola_token,
                 'Content-Type': 'application/json',
                 'x-notification-token': reqToken
             }
