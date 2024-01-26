@@ -19,3 +19,7 @@ class validateAddressSchema(BaseModel):
 class SendNotificationSchema(BaseModel):
     label: str | None
     payload: object | None
+
+class RequestExtradataParams(BaseModel): 
+    token: str
+

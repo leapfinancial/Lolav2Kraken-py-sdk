@@ -1,5 +1,5 @@
 import requests
-from lolakrakenpy.shemas.utils_shema import SendNotificationSchema, claimTokenSchema, validateAddressSchema
+from lolakrakenpy.shemas.utils_shema import RequestExtradataParams, SendNotificationSchema, claimTokenSchema, validateAddressSchema
 
 
 class LolaUtilsServicesManager:
@@ -119,6 +119,34 @@ class LolaUtilsServicesManager:
                 'payload': payload
             }
             data = SendNotificationSchema(**data).model_dump(exclude_none=True)
+
+            response = requests.post(endpoint, headers=headers, json=data)
+            response.raise_for_status()
+            return response.json()
+
+        except Exception as e:
+            raise ValueError(e)
+
+    def getExtradata(self, reqToken: str):
+        """
+        Validates an address.
+        Args:
+            reqToken (str): Token with basic user data.
+        Returns:
+            dict: The response JSON.
+        """
+        try:
+            endpoint = f'{self.lola_kraken_url}/utils/get-extradata'
+            headers = {
+                'x-lola-auth': self.lola_token,
+                'Content-Type': 'application/json',
+                'x-notification-token': reqToken
+            }
+
+            data = {
+                'token': reqToken
+            }
+            data = RequestExtradataParams(**data).model_dump(exclude_none=True)
 
             response = requests.post(endpoint, headers=headers, json=data)
             response.raise_for_status()
