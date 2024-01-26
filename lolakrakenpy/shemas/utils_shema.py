@@ -1,9 +1,10 @@
 
+from typing import Optional
 from pydantic import BaseModel
 
 
 class claimTokenUrlSchema(BaseModel):
-    baseUrl: str | None
+    baseUrl: Optional[str]
     chatLead: object | None
     sessionStore: object | None
     metadata: object | None
@@ -16,14 +17,14 @@ class claimTokenSchema(BaseModel):
 
 
 class validateAddressSchema(BaseModel):
-    baseUrl: str | None
+    baseUrl: Optional[str]
     chatLead: object | None
     sessionStore: object | None
     metadata: object | None
 
 
 class SendNotificationSchema(BaseModel):
-    label: str | None
+    label: Optional[str]
     payload: object | None
 
 class RequestExtradataParams(BaseModel): 
