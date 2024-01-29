@@ -8,7 +8,7 @@ class LolaUtilsServicesManager:
         self.lola_kraken_url = lola_kraken_url
         self.session = session
 
-    def claimToken(self, metadata=None, sessionStore=None):
+    def claimToken(self, metadata=None, sessionStore=None, extradata=None):
         """
         Claims a token.
         Args:
@@ -30,7 +30,8 @@ class LolaUtilsServicesManager:
             data = {
                 'chatLead': chatlead,
                 'sessionStore': sessionStore,
-                'metadata': metadata
+                'metadata': metadata,
+                'extradata': extradata
             }
             data = claimTokenSchema(**data).model_dump(exclude_none=True)
             response = requests.post(endpoint, headers=headers, json=data)

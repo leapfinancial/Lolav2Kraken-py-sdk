@@ -8,12 +8,13 @@ class claimTokenUrlSchema(BaseModel):
     chatLead: object | None
     sessionStore: object | None
     metadata: object | None
-    extraData : object | None
+    extradata : object | None
     
 class claimTokenSchema(BaseModel):
     chatLead: object | None
     sessionStore: object | None
     metadata: object | None
+    extraData : Optional[object] = None
 
 
 class validateAddressSchema(BaseModel):
