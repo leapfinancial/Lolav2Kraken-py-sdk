@@ -19,8 +19,16 @@ class LolaUtilsServicesManager:
         try:
             session = self.session
             print(session)
-            chatlead = session['lead']
-            sessionStore = sessionStore
+
+            chatlead = None
+            sessionStore = None
+            
+            try:
+                chatlead = session['lead']
+                sessionStore = sessionStore
+            except:
+                print("No session found")
+                pass
 
             endpoint = f'{self.lola_kraken_url}/utils/claim/token'
             headers = {
