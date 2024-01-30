@@ -135,6 +135,57 @@ class LolaUtilsServicesManager:
 
         except Exception as e:
             raise ValueError(e)
+        
+    def validateAddress(self, address: str):
+        """
+        Validates an address.
+        Args:
+            address (str): The address to validate.
+        Returns:
+            dict: The response JSON.
+        """
+        try:
+            endpoint = f'{self.lola_kraken_url}/utils/verify-address/{address}'
+            headers = {
+                'x-lola-auth': self.lola_token,
+                'Content-Type': 'application/json'
+            }
+
+            response = requests.get(endpoint, headers=headers)
+            response.raise_for_status()
+            return response.json()
+
+        except Exception as e:
+            raise ValueError(e)
+
+    def sendNotificationToTokenId(self, tokenId: str, label: str, payload):
+        """
+        Validates an address.
+        Args:
+            reqToken (str): Token with basic user data.
+            label (str): Label of the notification.
+            payload (object): Payload of the notification.
+        Returns:
+            dict: The response JSON.
+        """
+        try:
+            endpoint = f'{self.lola_kraken_url}/utils/send-notification/{tokenId}'
+            headers = {
+                'Content-Type': 'application/json',
+            }
+
+            data = {
+                'label': label,
+                'payload': payload
+            }
+            data = SendNotificationSchema(**data).model_dump(exclude_none=True)
+
+            response = requests.post(endpoint, headers=headers, json=data)
+            response.raise_for_status()
+            return response.json()
+
+        except Exception as e:
+            raise ValueError(e)
 
     def getExtradata(self, reqToken: str):
         """
