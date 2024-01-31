@@ -8,7 +8,7 @@ class claimTokenUrlSchema(BaseModel):
     chatLead: object | None
     sessionStore: object | None
     metadata: object | None
-    extradata : object | None
+    extraData : object | None
     
 class claimTokenSchema(BaseModel):
     chatLead: object | None
