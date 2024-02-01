@@ -1,3 +1,4 @@
+import threading
 import requests
 from lolakrakenpy.shemas.utils_shema import RequestExtradataParams, SendNotificationSchema, claimTokenSchema,claimTokenUrlSchema, validateAddressSchema
 
@@ -135,7 +136,8 @@ class LolaUtilsServicesManager:
 
         except Exception as e:
             raise ValueError(e)
-        
+    def threadSendNotification(self, reqToken: str, label: str, payload):
+        threading.Thread(target=self.sendNotification, args=(reqToken, label, payload)).start()
     def validateAddress(self, address: str):
         """
         Validates an address.
