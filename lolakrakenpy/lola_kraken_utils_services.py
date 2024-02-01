@@ -74,7 +74,7 @@ class LolaUtilsServicesManager:
                 'chatLead': chatlead,
                 'sessionStore': sessionStore,
                 'metadata': metadata,
-                'extraData': extraData
+                'extradata': extraData
             }
             data = claimTokenUrlSchema(**data).model_dump(exclude_none=True)
             response = requests.post(endpoint, headers=headers, json=data)
