@@ -159,7 +159,37 @@ class LolaUtilsServicesManager:
 
         except Exception as e:
             raise ValueError(e)
+        
+    def sendTokenIdNotification(self, tokenId: str, label: str, payload):
+        """
+        Send notification to token id.
+        Args:
+            tokenId (str): Token id to send notification.
+            label (str): Label of the notification.
+            payload (object): Payload of the notification.
+        Returns:
+            dict: The response JSON.
+        """
+        try:
+            endpoint = f'{self.lola_kraken_url}/utils/send-token-id-notification'
+            headers = {
+                'Content-Type': 'application/json',
+                'notification-token-id': tokenId,
+            }
 
+            data = {
+                'label': label,
+                'payload': payload
+            }
+            data = SendNotificationSchema(**data).model_dump(exclude_none=True)
+
+            response = requests.post(endpoint, headers=headers, json=data)
+            response.raise_for_status()
+            return response.json()
+
+        except Exception as e:
+            raise ValueError(e)
+        
     def sendNotificationToTokenId(self, tokenId: str, label: str, payload):
         """
         Validates an address.
