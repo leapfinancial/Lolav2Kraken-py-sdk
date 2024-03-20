@@ -189,6 +189,9 @@ class LolaUtilsServicesManager:
 
         except Exception as e:
             raise ValueError(e)
+    
+    def threadSendTokenIdNotification(self, tokenId: str, label: str, payload):
+        threading.Thread(target=self.sendTokenIdNotification, args=(tokenId, label, payload)).start()
         
     def sendNotificationToTokenId(self, tokenId: str, label: str, payload):
         """
