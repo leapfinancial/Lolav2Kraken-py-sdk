@@ -7,7 +7,7 @@ class LolaIproovServicesManager:
         self.lola_token = lola_token
         self.lola_kraken_url = lola_kraken_url
         self.session = session
-    def claimToken(self,returnUrl:str,theme:None):
+    def claimToken(self,returnUrl:str,theme:None,assuranceType='liveness'):
         """
         Claims a token.
         Args:
@@ -28,7 +28,7 @@ class LolaIproovServicesManager:
             metadata = {
                 'returnURL': returnUrl,
                 'operation': 'enrol',
-                'assuranceType': 'genuine_presence',
+                'assuranceType': assuranceType,
                 'lolaURL': self.lola_kraken_url,
                 'theme': theme
             }
