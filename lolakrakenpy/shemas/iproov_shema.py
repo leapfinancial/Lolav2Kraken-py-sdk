@@ -6,7 +6,6 @@ class metadataSchema(BaseModel):
     operation: str | None
     assuranceType: str | None
     lolaURL: str | None
-    language: str | None
     theme: object | None
 
 class claimTokenSchema(BaseModel):
