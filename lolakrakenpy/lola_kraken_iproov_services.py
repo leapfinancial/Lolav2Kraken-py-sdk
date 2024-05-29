@@ -75,6 +75,7 @@ class LolaIproovServicesManager:
                 'operation': 'enrol',
                 'assuranceType': assuranceType,
                 'lolaURL': self.lola_kraken_url,
+                'language': language,
                 'theme': theme
             }
             session = self.session
@@ -87,8 +88,7 @@ class LolaIproovServicesManager:
                 'baseUrl': None,
                 'chatLead': chatlead,
                 'sessionStore': sessionStore,
-                'metadata': metadata,
-                'language': language
+                'metadata': metadata
             }
             data = claimTokenSchema(**data).model_dump(exclude_none=True)
             response = requests.post(endpoint, headers=headers, json=data)
