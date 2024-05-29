@@ -50,7 +50,7 @@ class LolaIproovServicesManager:
         
         except Exception as e:
             raise ValueError(e)
-    def claimLink(self,returnUrl:str,theme:None,sessionStore=None,develoment:bool=False,assuranceType = 'liveness'):
+    def claimLink(self,returnUrl:str,theme:None,sessionStore=None,develoment:bool=False,assuranceType = 'liveness',language='en'):
         """
         Claims a Link
         
@@ -87,7 +87,8 @@ class LolaIproovServicesManager:
                 'baseUrl': None,
                 'chatLead': chatlead,
                 'sessionStore': sessionStore,
-                'metadata': metadata
+                'metadata': metadata,
+                'language': language
             }
             data = claimTokenSchema(**data).model_dump(exclude_none=True)
             response = requests.post(endpoint, headers=headers, json=data)
