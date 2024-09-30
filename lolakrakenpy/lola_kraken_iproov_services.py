@@ -70,14 +70,16 @@ class LolaIproovServicesManager:
             sessionStore = {
                 'userId' : conversationId
             }
+            ## add to theme the key language
+            theme['language'] = language
             metadata = {
                 'returnURL': returnUrl,
                 'operation': 'enrol',
                 'assuranceType': assuranceType,
                 'lolaURL': self.lola_kraken_url,
-                'language': language,
                 'theme': theme
             }
+            
             session = self.session
             print(session)
             chatlead = session['lead']
