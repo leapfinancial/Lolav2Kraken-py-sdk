@@ -100,7 +100,7 @@ class LolaIproovServicesManager:
         except Exception as e:
             raise ValueError(e)
     
-    def claimLinkCallback(self,returnUrl:str,theme:None,callback=None,develoment:bool=False,assuranceType = 'liveness',language='en'):
+    def claimLinkCallback(self,returnUrl:str,theme:None,callback=None,develoment:bool=False,assuranceType = 'liveness',language='en',conversationId:str=None):
         """
         Claims a Link
         
@@ -111,9 +111,14 @@ class LolaIproovServicesManager:
         
         """
         try:
+            if conversationId is None:
+                conversationId = str(uuid.uuid4())
                         
             ## add to theme the key language
             theme['language'] = language
+            sessionStore = {
+                'userId' : conversationId
+            }
             metadata = {
                 'returnURL': returnUrl,
                 'operation': 'enrol',
@@ -126,7 +131,9 @@ class LolaIproovServicesManager:
             headers = {'x-lola-auth': self.lola_token, 'Content-Type': 'application/json'}
             data = {
                 'baseUrl': None,
-                'metadata': metadata
+                'metadata': metadata,
+                'chatLead': {},
+                'sessionStore': sessionStore
             }
             data = claimTokenSchemaCallback(**data).model_dump(exclude_none=True)
             response = requests.post(endpoint, headers=headers, json=data)
