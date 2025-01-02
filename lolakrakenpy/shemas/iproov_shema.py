@@ -13,3 +13,9 @@ class claimTokenSchema(BaseModel):
     chatLead: object | None
     sessionStore: object  | None
     metadata: metadataSchema | None
+
+class claimTokenSchemaCallback(BaseModel):
+    baseUrl: str | None
+    chatLead: object | None
+    sessionStore: object  | None
+    metadata: metadataSchema | None

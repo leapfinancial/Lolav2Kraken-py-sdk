@@ -1,6 +1,6 @@
 import uuid
 import requests
-from lolakrakenpy.shemas.iproov_shema import claimTokenSchema
+from lolakrakenpy.shemas.iproov_shema import claimTokenSchema, claimTokenSchemaCallback
 
 class LolaIproovServicesManager:
     def __init__(self, session, lola_token, lola_kraken_url):
@@ -128,7 +128,7 @@ class LolaIproovServicesManager:
                 'baseUrl': None,
                 'metadata': metadata
             }
-            data = claimTokenSchema(**data).model_dump(exclude_none=True)
+            data = claimTokenSchemaCallback(**data).model_dump(exclude_none=True)
             response = requests.post(endpoint, headers=headers, json=data)
             response.raise_for_status()
             return response.json()
