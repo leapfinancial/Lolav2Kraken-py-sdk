@@ -107,7 +107,7 @@ class LolaUtilsServicesManager:
         except Exception as e:
             raise ValueError(e)
 
-    def sendNotification(self, reqToken: str, label: str, payload):
+    def sendNotification(self, reqToken: str, label: str, payload,delay: int = 0):
         """
         Validates an address.
         Args:
@@ -118,6 +118,8 @@ class LolaUtilsServicesManager:
             dict: The response JSON.
         """
         try:
+            import time
+            time.sleep(delay)
             endpoint = f'{self.lola_kraken_url}/utils/sendnotification'
             headers = {
                 'Content-Type': 'application/json',
@@ -136,8 +138,8 @@ class LolaUtilsServicesManager:
 
         except Exception as e:
             raise ValueError(e)
-    def threadSendNotification(self, reqToken: str, label: str, payload):
-        threading.Thread(target=self.sendNotification, args=(reqToken, label, payload)).start()
+    def threadSendNotification(self, reqToken: str, label: str, payload, delay: int = 0):
+        threading.Thread(target=self.sendNotification, args=(reqToken, label, payload, delay)).start()
     def validateAddress(self, address: str):
         """
         Validates an address.

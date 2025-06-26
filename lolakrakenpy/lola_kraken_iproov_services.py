@@ -1,6 +1,6 @@
 import uuid
 import requests
-from lolakrakenpy.shemas.iproov_shema import claimTokenSchema
+from lolakrakenpy.shemas.iproov_shema import claimTokenSchema, claimTokenSchemaCallback
 
 class LolaIproovServicesManager:
     def __init__(self, session, lola_token, lola_kraken_url):
@@ -93,6 +93,49 @@ class LolaIproovServicesManager:
                 'metadata': metadata
             }
             data = claimTokenSchema(**data).model_dump(exclude_none=True)
+            response = requests.post(endpoint, headers=headers, json=data)
+            response.raise_for_status()
+            return response.json()
+        
+        except Exception as e:
+            raise ValueError(e)
+    
+    def claimLinkCallback(self,returnUrl:str,theme:None,callback=None,develoment:bool=False,assuranceType = 'liveness',language='en',conversationId:str=None):
+        """
+        Claims a Link
+        
+        Args:
+            Link (str): The Link to claim.
+        Returns:
+            dict: The response JSON.
+        
+        """
+        try:
+            if conversationId is None:
+                conversationId = str(uuid.uuid4())
+                        
+            ## add to theme the key language
+            theme['language'] = language
+            sessionStore = {
+                'userId' : conversationId
+            }
+            metadata = {
+                'returnURL': returnUrl,
+                'operation': 'enrol',
+                'assuranceType': assuranceType,
+                'lolaURL': self.lola_kraken_url,
+                'theme': theme,
+                'callbackURL': callback
+            }            
+            endpoint = f'{self.lola_kraken_url}/pol/claim/link'
+            headers = {'x-lola-auth': self.lola_token, 'Content-Type': 'application/json'}
+            data = {
+                'baseUrl': None,
+                'metadata': metadata,
+                'chatLead': {},
+                'sessionStore': sessionStore
+            }
+            data = claimTokenSchemaCallback(**data).model_dump(exclude_none=True)
             response = requests.post(endpoint, headers=headers, json=data)
             response.raise_for_status()
             return response.json()
