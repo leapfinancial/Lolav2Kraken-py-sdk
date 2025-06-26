@@ -162,7 +162,7 @@ class LolaUtilsServicesManager:
         except Exception as e:
             raise ValueError(e)
         
-    def sendTokenIdNotification(self, tokenId: str, label: str, payload):
+    def sendTokenIdNotification(self, tokenId: str, label: str, payload,delay: int = 0):
         """
         Send notification to token id.
         Args:
@@ -173,6 +173,9 @@ class LolaUtilsServicesManager:
             dict: The response JSON.
         """
         try:
+        
+            import time
+            time.sleep(delay)
             endpoint = f'{self.lola_kraken_url}/utils/send-token-id-notification'
             headers = {
                 'Content-Type': 'application/json',
