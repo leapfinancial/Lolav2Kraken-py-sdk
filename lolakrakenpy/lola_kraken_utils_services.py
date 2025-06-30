@@ -7,7 +7,7 @@ from lolakrakenpy.shemas.utils_shema import RequestExtradataParams, SendNotifica
 
 
 class LolaUtilsServicesManager:
-    def __init__(self, session, lola_token, lola_kraken_url, max_workers=5):
+    def __init__(self, session, lola_token, lola_kraken_url, max_workers=20):
         self.lola_token = lola_token
         self.lola_kraken_url = lola_kraken_url
         self.session = session
