@@ -39,11 +39,24 @@ class LolaUtilsServicesManager:
     
     def process_priority_queue(self):
         """
-        Procesa las tareas de la cola de prioridad
+        Procesa las tareas de la cola de prioridad, asegurando que las de mayor prioridad
+        (número más bajo) se ejecuten primero
         """
+        # Recolectar todas las tareas disponibles
+        tasks = []
         while not self.priority_queue.empty():
             try:
-                priority, task_id, func, args, kwargs = self.priority_queue.get_nowait()
+                task = self.priority_queue.get_nowait()
+                tasks.append(task)
+            except queue.Empty:
+                break
+
+        # Ordenar por prioridad (número más bajo primero)
+        tasks.sort(key=lambda x: x[0])
+
+        # Procesar tareas en orden de prioridad
+        for priority, task_id, func, args, kwargs in tasks:
+            if self.semaphore._value > 0:  # Verificar si hay workers disponibles
                 future = self.executor.submit(self._execute_with_semaphore, func, args, kwargs)
                 with self.thread_lock:
                     self.active_threads[task_id] = {
@@ -51,8 +64,9 @@ class LolaUtilsServicesManager:
                         'priority': priority,
                         'status': 'running'
                     }
-            except queue.Empty:
-                break
+            else:
+                # Si no hay workers, devolver a la cola manteniendo prioridad
+                self.priority_queue.put((priority, task_id, func, args, kwargs))
     
     def _execute_with_semaphore(self, func, args, kwargs):
         """
