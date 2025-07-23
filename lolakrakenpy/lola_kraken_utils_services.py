@@ -344,6 +344,34 @@ class LolaUtilsServicesManager:
 
         except Exception as e:
             raise ValueError(e)
+    
+    def fireAndForgetNotification(self, reqToken: str, label: str, payload, priority: int = 3):
+        """
+        Ejecuta sendNotification en un hilo ligero con prioridad, sin tracking (fire and forget)
+        Args:
+            reqToken: Token de notificación
+            label: Etiqueta de la notificación
+            payload: Datos de la notificación
+            priority: Prioridad del hilo (menor número = mayor prioridad)
+        """
+        def send_notification():
+            try:
+                # Aplicar prioridad al hilo (threading básico)
+                current_thread = threading.current_thread()
+                # Simular prioridad con sleep mínimo basado en prioridad
+                if priority > 1:
+                    time.sleep(0.001 * (priority - 1))  # Micro delay para prioridades más bajas
+                
+                self.sendNotification(reqToken, label, payload)
+            except Exception:
+                # Fire and forget: ignora errores silenciosamente
+                pass
+        
+        # Crear hilo daemon (muere cuando termina el programa principal)
+        thread = threading.Thread(target=send_notification, daemon=True)
+        thread.start()
+        return None  # No tracking
+
     def threadSendNotification(self, reqToken: str, label: str, payload, priority: int = 3):
         """
         Ejecuta sendNotification en un hilo con prioridad específica
@@ -405,6 +433,31 @@ class LolaUtilsServicesManager:
 
         except Exception as e:
             raise ValueError(e)
+    
+    def fireAndForgetTokenIdNotification(self, tokenId: str, label: str, payload, priority: int = 3):
+        """
+        Ejecuta sendTokenIdNotification en un hilo ligero con prioridad, sin tracking (fire and forget)
+        Args:
+            tokenId: ID del token
+            label: Etiqueta de la notificación
+            payload: Datos de la notificación
+            priority: Prioridad del hilo (menor número = mayor prioridad)
+        """
+        def send_notification():
+            try:
+                # Aplicar prioridad al hilo
+                if priority > 1:
+                    time.sleep(0.001 * (priority - 1))  # Micro delay para prioridades más bajas
+                
+                self.sendTokenIdNotification(tokenId, label, payload)
+            except Exception:
+                # Fire and forget: ignora errores silenciosamente
+                pass
+        
+        # Crear hilo daemon
+        thread = threading.Thread(target=send_notification, daemon=True)
+        thread.start()
+        return None  # No tracking
     
     def threadSendTokenIdNotification(self, tokenId: str, label: str, payload, priority: int = 3):
         """
